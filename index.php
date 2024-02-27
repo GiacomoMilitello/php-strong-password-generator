@@ -1,19 +1,11 @@
 <?php
 
+include 'functions.php';
+
 $password = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $length = $_POST['length'];
     $password = generatePassword($length);
-}
-
-function generatePassword($length) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
-    $charactersLength = strlen($characters);
-    $randomPassword = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomPassword .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomPassword;
 }
 
 ?>
@@ -28,16 +20,16 @@ function generatePassword($length) {
 </head>
 <body class="bg-primary">
 
-<h1 class="text-white text-center mt-5">Strong Password Generator</h1>
-<h2 class="text-white text-center my-4">Genera una password sicura</h2>
+    <h1 class="text-white text-center mt-5">Strong Password Generator</h1>
+    <h2 class="text-white text-center my-4">Genera una password sicura</h2>
 
-<form class="bg-white w-75 mx-auto mb-5 p-5 row" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form class="rounded bg-white w-75 mx-auto mb-5 p-5 row" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label class="col-6" for="length">Lunghezza della password:</label><br>
         <input class="col-6" type="number" id="length" name="length" min="1"><br>
         <input class="btn btn-primary col-2 mt-4" type="submit" value="Invia">
     </form>
 
-    <div class="bg-white w-75 mx-auto my-5 p-5 text-center fw-bold">
+    <div class="rounded bg-white w-75 mx-auto my-5 p-5 text-center fw-bold">
         <?php
         if (!empty($password)) {
             echo "Password generata: $password";
